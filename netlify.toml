@@ -1,0 +1,29 @@
+[build]
+  command = "yarn build"
+  publish = ".next"
+
+[[headers]]
+for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+
+[[headers]]
+for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[context.production.environment]
+[build.environment]
+  NEXT_PUBLIC_API_BASE_URL = "https://news-accessibilty-platform-premium.onrender.com"
+  NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY = "pk_test_e69de1d7b6adda5f821b9ebc09de3cba1e20c6dd"
