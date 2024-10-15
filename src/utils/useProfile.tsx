@@ -20,6 +20,7 @@ interface UserProfile {
   created_at: string;
   email: string;
   full_name: string;
+  fav_newstype: string;
   isAdmin: boolean;
   last_login: string;
   phone_number: string | null;

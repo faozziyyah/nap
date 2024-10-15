@@ -21,14 +21,14 @@ export default function RootLayout({
         <link rel="icon" href="/images//Logo.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="apple-touch-icon" href="/Logo.png" />
-        <link rel="stylesheet" href="/src/styles/globals.css" />
+        {/*<link rel="stylesheet" href="/src/styles/globals.css" />*/}
         <script src="https://js.paystack.co/v2/inline.js" async></script>
         <link href="https://fonts.cdnfonts.com/css/manrope" rel="stylesheet" />
         <link href="https://fonts.cdnfonts.com/css/axiforma" rel="stylesheet" />
-        <link
+        {/*<link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
           rel="stylesheet"
-        />
+        />*/}
         <link
           rel="stylesheet"
           type="text/css"
@@ -49,10 +49,10 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           //   crossOrigin
         />
-        <link
+        {/*<link
           href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
           rel="stylesheet"
-        />
+        />*/}
       </head>
       <body>
         <div id="root">

@@ -30,6 +30,10 @@ type contextValues = {
     user: any,
     callBack: ({ status, message }: callbackArgs) => void,
   ) => void;
+  favorites: (
+    user: any,
+    callBack: ({ status, message }: callbackArgs) => void,
+  ) => void;
   SendCode: (
     user: any,
     callBack: ({ status, message }: callbackArgs) => void,
@@ -49,6 +53,7 @@ const defaultContextValues: contextValues = {
   signOut: () => {},
   signOutAux: () => {},
   signIn: () => {},
+  favorites: () => {},
   SendCode: () => {},
   loggingOut: false,
   setLoggingOut: () => {},
@@ -91,6 +96,23 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   const signUp = (
+    user: any,
+    callBack: ({ status, message }: callbackArgs) => void,
+  ) =>
+    mutationSignup.mutate(user, {
+      onSuccess: (data: any) => {
+        setSession(data.data);
+        callBack({ status: 'success', message: data.message });
+      },
+      onError: (err: any) => {
+        callBack({
+          status: 'error',
+          message: err?.response?.data?.message ?? err.message,
+        });
+      },
+    });
+
+  const favorites = (
     user: any,
     callBack: ({ status, message }: callbackArgs) => void,
   ) =>
@@ -208,6 +230,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     signOut,
     signOutAux,
     signIn,
+    favorites,
     SendCode,
     loggingOut,
     setLoggingOut,

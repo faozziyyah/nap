@@ -7,7 +7,6 @@ import {
   Col,
   Input,
   Dropdown,
-  message,
   Image,
 } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -16,21 +15,31 @@ import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import { useIPAddress } from '@/utils/useIPAddress';
 import type { MenuProps } from 'antd';
 import 'react-phone-number-input/style.css';
-import { useAuth } from '../hooks/useAuth';
+//import { useAuth } from '../hooks/useAuth';
 import ErrorAlert from '@/app/resusables/ErrorAlerts';
 
 const { Title } = Typography;
 
 export function Register() {
   const [form] = Form.useForm();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isProcessing, setProcessing] = useState(false);
-  const { signUp } = useAuth();
+  //const { signUp } = useAuth();
   const router = useRouter();
   const [passkey, setPasskey] = useState('');
   const { data: ipAddress } = useIPAddress();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [formValues, setFormValues] = useState({});
 
-  const registerCallback = (data: any) => {
+  const handleSubmit = (values: any) => {
+    setFormValues(values);
+    localStorage.setItem('formValues', JSON.stringify(values));
+    router.push('/favourite');
+  };
+
+  /*const registerCallback = (data: any) => {
     setProcessing(false);
 
     if (data.status !== 'success') {
@@ -53,7 +62,7 @@ export function Register() {
 
     setProcessing(true);
     signUp(user, registerCallback);
-  };
+  };*/
 
   const items: MenuProps['items'] = [
     {
@@ -214,6 +223,7 @@ export function Register() {
                     </Form.Item>
                   </Dropdown>
                 </Col>
+
                 <Col xs={24} md={24} lg={24}>
                   <Form.Item
                     name="confirm_password"
@@ -268,6 +278,7 @@ export function Register() {
           </div>
         </div>
       </div>
+
       <div className="fixed bottom-0 right-0 p-4 hidden lg:block">
         <Image
           src="/images/SideImage.png"
