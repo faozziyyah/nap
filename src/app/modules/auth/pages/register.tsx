@@ -259,7 +259,7 @@ export function Register() {
                 size="large"
                 htmlType="submit"
               >
-                Sign Up
+                Next
               </Button>
 
               <div className="flex flex-col mt-6 space-y-4">

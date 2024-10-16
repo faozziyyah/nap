@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Input, Button, Upload, message } from 'antd';
 import { useGetTrendingNews } from '@/app/api/dashboard';
 import { useProfile } from '@/utils/useProfile';
+import securedStorage from 'react-secure-storage';
 import '@/styles/globals.css';
 import { useExtractArticle, useTranscribeVideo } from '@/app/api/article';
 import { useUrlContext } from '@/contexts/url-context';
@@ -26,6 +27,10 @@ export function Dashboard() {
   const { mutateAsync: transcribeVideo } = useTranscribeVideo(setVideoData);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [videoName, setVideoName] = useState<string | null>(null);
+  const [favNews, setFavNews] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const token = securedStorage.getItem('jwt_token');
 
   const handleNewsClick = (newsUrl: string) => {
     setUrl(newsUrl);
@@ -69,13 +74,39 @@ export function Dashboard() {
     return false;
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://news-accessibilty-platform-premium.onrender.com/trending_dashboard',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        setFavNews(data);
+        console.log(data);
+      } catch (error) {
+        //setError(error.message);
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <section className="mt-36 lg:mt-16 overflow-hidden flex justify-between w-full">
       {isLoadingArticle ? (
         <ArticleLoading />
       ) : (
         <div className="flex justify-between">
-          <section className="flex flex-col w-[70%]">
+          <section className="flex flex-col w-[68%]">
             <div className="text-center lg:text-left text-lg lg:text-2xl lg:mb-1 h-full">
               <h1 className="gradient-text text-[32px] leading-10">
                 Hi {profile?.user_profile?.full_name}!
@@ -161,6 +192,21 @@ export function Dashboard() {
             <h1 className="capitalize text-[#5E60CE] font-bold text-[24px]">
               latest from {profile?.user_profile?.fav_newstype}
             </h1>
+
+            <div className="flex flex-col">
+              {favNews.map((news: any) => (
+                <div
+                  key={news.id}
+                  className="bg-[#B3CCE880] flex flex-col mt-4 px-2 py-4 rounded-lg"
+                >
+                  {/*<img src={news.image_url} alt='' />*/}
+                  <h1 className="font-semibold text-sm">{news.title}</h1>
+                  <p className="text-xs font-normal line-clamp-2 overflow-hidden text-ellipsis">
+                    {news.content}
+                  </p>
+                </div>
+              ))}
+            </div>
           </section>
         </div>
       )}

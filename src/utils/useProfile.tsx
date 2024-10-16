@@ -1,5 +1,4 @@
 'use client';
-
 import { useQuery } from 'react-query';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import useAxiosPrivate from './useAxiosPrivate';
