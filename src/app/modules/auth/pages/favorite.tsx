@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Chip } from '@mui/material';
 
 export function Favorite() {
+  
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const router = useRouter();
 
@@ -12,11 +13,12 @@ export function Favorite() {
   };
 
   const handleSubmit = async () => {
+
     const formValues = JSON.parse(localStorage.getItem('formValues') || '{}');
     //console.log(formValues);
 
     const fullData = { ...formValues, fav_newstype: selectedChoice };
-    console.log(fullData);
+    //console.log(fullData);
 
     try {
       const response = await fetch(
