@@ -4,23 +4,19 @@ import { useRouter } from 'next/navigation';
 import { Chip } from '@mui/material';
 
 export function Favorite() {
-  const [selectedChoices, setSelectedChoices] = useState<string[]>([]);
+  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const router = useRouter();
 
   const handleChipClick = (choiceValue: string) => {
-    setSelectedChoices((prev) =>
-      prev.includes(choiceValue)
-        ? prev.filter((item) => item !== choiceValue)
-        : [...prev, choiceValue],
-    );
+    setSelectedChoice((prev) => (prev === choiceValue ? null : choiceValue));
   };
 
   const handleSubmit = async () => {
     const formValues = JSON.parse(localStorage.getItem('formValues') || '{}');
     //console.log(formValues);
 
-    const fullData = { ...formValues, selectedChoices };
-    //console.log(fullData);
+    const fullData = { ...formValues, fav_newstype: selectedChoice };
+    console.log(fullData);
 
     try {
       const response = await fetch(
@@ -62,14 +58,9 @@ export function Favorite() {
         </h1>
 
         <p className="border-[#DBDBDB] border-b-2 mb-2">
-          {selectedChoices.length > 0
-            ? selectedChoices
-                .map(
-                  (choiceValue) =>
-                    choices.find((choice) => choice.value === choiceValue)
-                      ?.displayName,
-                )
-                .join(', ')
+          {selectedChoice
+            ? choices.find((choice) => choice.value === selectedChoice)
+                ?.displayName
             : 'No news type selected'}
         </p>
 
@@ -79,9 +70,7 @@ export function Favorite() {
               key={choice.value}
               label={choice.displayName}
               clickable
-              color={
-                selectedChoices.includes(choice.value) ? 'primary' : 'default'
-              }
+              color={selectedChoice === choice.value ? 'primary' : 'default'}
               onClick={() => handleChipClick(choice.value)}
               className="mt-4 rounded-md w-[30%]"
             />
