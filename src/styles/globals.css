@@ -121,7 +121,8 @@ body {
   transition:
     margin-left 0.3s ease,
     width 0.3s ease;
-  width: 90%;
+  /*width: 80%;*/
+  margin: auto;
   /*width: calc(100% - 250px);*/
   justify-content: center;
 }

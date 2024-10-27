@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { Chip } from '@mui/material';
 
 export function Favorite() {
-  
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const router = useRouter();
 
@@ -13,7 +12,6 @@ export function Favorite() {
   };
 
   const handleSubmit = async () => {
-
     const formValues = JSON.parse(localStorage.getItem('formValues') || '{}');
     //console.log(formValues);
 
@@ -79,13 +77,13 @@ export function Favorite() {
           ))}
         </div>
 
-        <button className="bg-[#5E60CE] text-white rounded-lg border mt-16 w-[20%] py-2">
+        <button className="bg-[#5E60CE] text-white rounded-lg border mt-16 w-[20%] py-2 cursor-pointer">
           Skip
         </button>
 
         <button
           onClick={handleSubmit}
-          className="bg-[#5E60CE] text-white rounded-lg border mt-4 w-[30%] py-2 text-sm"
+          className="bg-[#5E60CE] text-white rounded-lg border mt-4 w-[30%] py-2 text-sm cursor-pointer"
         >
           Continue To Dahsboard
         </button>

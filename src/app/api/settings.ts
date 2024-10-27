@@ -127,6 +127,32 @@ export const useUpdatePassword = () => {
   });
 };
 
+export const useUpdateFavourite = () => {
+  const axiosPrivate = useAxiosPrivate();
+
+  return useMutation({
+    mutationFn: async ({ fav_newstype }: { fav_newstype: string }) => {
+      const req = await axiosPrivate({
+        url: '/update/trending_dashboard',
+        method: 'POST',
+        data: { fav_newstype },
+      });
+      return req;
+    },
+    onSuccess: (response) => {
+      const { data } = response;
+      if (data.message !== 'favourite news updated successfully') {
+        message.error(data.message);
+        return;
+      }
+      message.success(data.message, 3);
+    },
+    onError: (data: any) => {
+      message.error(data?.response?.data?.message);
+    },
+  });
+};
+
 export const useClearHistory = () => {
   const axiosPrivate = useAxiosPrivate();
   const queryClient = useQueryClient();

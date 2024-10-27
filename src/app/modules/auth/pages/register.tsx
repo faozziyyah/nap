@@ -97,7 +97,7 @@ export function Register() {
         <Navbar />
       </div>
 
-      <div className="flex flex-col h-screen pt-16 lg:pt-0 lg:flex-row">
+      <div className="flex flex-col pt-16 lg:pt-0 lg:flex-row">
         <div className="relative hidden h-full w-[50%] flex-shrink-0 p-5 lg:block">
           <Image
             preview={false}
@@ -108,8 +108,8 @@ export function Register() {
           />
         </div>
 
-        <div className="flex flex-grow-0 overflow-y-auto items-center justify-center p-3 lg:p-8 lg:px-16 xl:px-14">
-          <div className="my-20 max-w-2xl">
+        <div className="flex flex-grow-0 overflow-y-auto items-center justify-center lg:px-16 xl:px-14">
+          <div className="max-w-2xl">
             <div className="mb-12">
               <Title className="m-0 mb-5 mt-16" style={{ margin: 0 }} level={2}>
                 Create an Account

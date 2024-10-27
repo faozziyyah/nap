@@ -18,8 +18,6 @@ function Main({ children }: { children: React.ReactNode }) {
   const [collapsedMobile, setCollapsedMobile] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  const sidebarWidth = 250;
-
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 768);
@@ -33,8 +31,11 @@ function Main({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  const sidebarWidth = 300;
+
   const layoutStyle = {
     marginLeft: collapsed ? `auto` : `${sidebarWidth}px`,
+    width: collapsed ? `80%` : `75%`,
     transition: 'margin-left 0.3s',
     backgroundColor: '',
   };

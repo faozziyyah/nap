@@ -10,6 +10,7 @@ import ProfileContent from './profile/profileContent';
 import ChangePassword from './password/passwordContent';
 import { useRouter } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import ChangeFavourite from './favourite/favouriteContent';
 
 const { Text } = Typography;
 
@@ -26,6 +27,7 @@ export const SettingsModal = ({
   const [assistantModal, setAssistantModal] = useState(false);
   const [profileModal, setProfileModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
+  const [favouriteModal, setFavouriteModal] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [password, setPassword] = useState('');
   const { isLoading: deleteLoading, mutateAsync: deleteUserAccount } =
@@ -111,6 +113,7 @@ export const SettingsModal = ({
               <Switch onChange={handleTheme} />
             </div>
           </div>
+
           <div
             className="flex items-center w-full"
             onClick={() => setProfileModal(true)}
@@ -125,6 +128,7 @@ export const SettingsModal = ({
             </svg>
             <Text>Profile Settings</Text>
           </div>
+
           <div
             className="flex items-center w-full"
             onClick={() => setAssistantModal(true)}
@@ -143,6 +147,7 @@ export const SettingsModal = ({
               <RightOutlined />
             </div>
           </div>
+
           <div className="flex items-center w-full" onClick={handleAnalytics}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -154,6 +159,7 @@ export const SettingsModal = ({
             </svg>
             <Text>Analytics</Text>
           </div>
+
           <div
             className="flex items-center w-full"
             onClick={() => setPasswordModal(true)}
@@ -172,6 +178,26 @@ export const SettingsModal = ({
             </svg>
             <Text>Change Password</Text>
           </div>
+
+          <div
+            className="flex items-center w-full"
+            onClick={() => setFavouriteModal(true)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-4 h-4 mr-2"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 1a3.5 3.5 0 0 0-3.5 3.5V7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7V4.5A3.5 3.5 0 0 0 8 1Zm2 6V4.5a2 2 0 1 0-4 0V7h4Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <Text>Change Favourite</Text>
+          </div>
+
           <div
             className="flex items-center w-full"
             onClick={() => setDeleteModal(true)}
@@ -192,6 +218,7 @@ export const SettingsModal = ({
           </div>
         </div>
       </Modal>
+
       <Modal
         open={deleteModal}
         footer={null}
@@ -250,6 +277,15 @@ export const SettingsModal = ({
         onCancel={() => setPasswordModal(false)}
       >
         <ChangePassword modalStep={currentStep} profile={profile} />
+      </Modal>
+      <Modal
+        open={favouriteModal}
+        footer={null}
+        width={500}
+        closeIcon={<CloseCircleOutlined />}
+        onCancel={() => setFavouriteModal(false)}
+      >
+        <ChangeFavourite modalStep={currentStep} profile={profile} />
       </Modal>
     </>
   );
