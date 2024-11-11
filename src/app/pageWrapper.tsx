@@ -1,7 +1,6 @@
 'use client';
-
 import React from 'react';
-import { ReactQueryDevtools } from 'react-query/devtools';
+//import { ReactQueryDevtools } from 'react-query/devtools';
 import { ConfigProvider } from 'antd';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthProvider } from './modules/auth/hooks/useAuth';
@@ -38,7 +37,7 @@ export default function PageWrapper({
           {children}
         </ConfigProvider>
       </AuthProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/*<ReactQueryDevtools initialIsOpen={false} />*/}
     </QueryClientProvider>
   );
 }

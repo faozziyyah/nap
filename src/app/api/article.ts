@@ -3,6 +3,7 @@ import useAxiosPrivate from '@/utils/useAxiosPrivate';
 import { message } from 'antd';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from 'react-query';
+import securedStorage from 'react-secure-storage';
 
 export const useExtractArticle = (setArticleData: any) => {
   const axiosPrivate = useAxiosPrivate();
@@ -37,19 +38,20 @@ export const useExtractArticle = (setArticleData: any) => {
 };
 
 export const useTranscribeVideo = (setVideoData: (data: any) => void) => {
-  const axiosPrivate = useAxiosPrivate();
+  //const axiosPrivate = useAxiosPrivate();
+  const token = securedStorage.getItem('jwt_token');
 
   return useMutation({
     mutationFn: async (formData: FormData) => {
-      const response = await axiosPrivate({
-        url: '/transcribe',
+
+      const response = await fetch('https://news-accessibilty-platform-premium.onrender.com/transcribe', {
         method: 'POST',
-        data: formData,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`,
         },
+        body: formData,
       });
-      return response.data;
+      return await response.json();
     },
     onSuccess: (data) => {
       setVideoData(data);

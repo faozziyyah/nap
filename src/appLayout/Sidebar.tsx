@@ -228,6 +228,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
         className={`fixed top-0 left-0 h-full hidden lg:block bg-white web-sidebar overflow-y-auto ${sidebarClass}`}
         style={{ position: 'fixed', left: 0, top: 0, bottom: 0, zIndex: 1000 }}
       >
+
         <div
           className={`flex items-center ${collapsed ? `justify-center` : `justify-end`} mt-5`}
         >
@@ -275,6 +276,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             </Button>
           )}
         </div>
+
         <div className="flex justify-center items-center mt-20 p-5">
           {collapsed ? (
             <SearchOutlined className="w-6 h-6 z-100 block text-black" />
@@ -289,6 +291,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             />
           )}
         </div>
+
         <div
           className="mt-5 mb-5 text-black"
           onClick={() => router.push('/dashboard')}
@@ -337,6 +340,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             </Button>
           )}
         </div>
+
         <div className="-mt-10 -mb-10">
           <Menu mode="inline" onClick={onClick} selectedKeys={[current]}>
             {collapsed && (
@@ -347,6 +351,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             )}
           </Menu>
         </div>
+
         <div className="mx-10 mt-2">
           {collapsed ? null : (
             <>
@@ -467,6 +472,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             </>
           )}
         </div>
+
         <div className="mt-5">
           {collapsed ? null : (
             <Button
@@ -496,6 +502,7 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             </Button>
           )}
         </div>
+
         <div className="flex justify-center items-center mt-1 mb-4">
           <Menu
             onClick={onClick}
@@ -525,7 +532,9 @@ function SideBar({ collapsed, setCollapsed }: SidebarProps) {
             </Button>
           )}
         </div>
+
       </Sider>
+      
       <SettingsModal
         settingsModal={settingsModal}
         setSettingsModal={setSettingsModal}
