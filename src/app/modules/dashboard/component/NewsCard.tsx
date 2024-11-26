@@ -29,12 +29,11 @@ const NewsCard: React.FC<NewsCardProps> = ({
   return (
     <div
       key={news.id}
-      className="news-card cursor-pointer p-4 border rounded-md shadow-sm hover:shadow-md flex-shrink-0"
-      style={{ maxWidth: '300px' }}
+      className="news-card cursor-pointer p-4 border rounded-md shadow-sm hover:shadow-md flex-shrink-0 w-[50%]"
       onClick={() => handleNewsClick(news?.article_url)}
       onTouchEnd={() => handleTouchEnd(news?.article_url)}
     >
-      <div className="hidden lg:block">
+      <div className="">
         <Image
           src={news?.image_url}
           preview={false}

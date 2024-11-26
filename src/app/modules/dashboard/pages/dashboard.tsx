@@ -58,14 +58,13 @@ export function Dashboard() {
   };
 
   const handleFileChange = (info: any) => {
+    const file = info.file.originFileObj;
 
-    const file = info.file.originFileObj; 
-  
     if (!file || !file.type.startsWith('video/')) {
       message.error('You can only upload video files!');
       return;
     }
-  
+
     const url = URL.createObjectURL(file);
     const video = document.createElement('video');
     video.src = url;
@@ -107,14 +106,12 @@ export function Dashboard() {
   }, []);
 
   return (
-    <section className="mt-36 lg:mt-16 overflow-hidden flex justify-between w-full">
+    <section className="mt-10 lg:mt-16 overflow-hidden flex justify-between w-full">
       {isLoadingArticle ? (
         <ArticleLoading />
       ) : (
-        <div className="flex justify-between">
-
-          <section className="flex flex-col w-[68%]">
-
+        <div className="flex flex-col lg:flex-row lg:justify-between w-full">
+          <section className="flex flex-col w-full lg:w-[68%]">
             <div className="text-center lg:text-left text-lg lg:text-2xl lg:mb-1 h-full">
               <h1 className="gradient-text text-[32px] leading-10 text-center">
                 Hi {profile?.user_profile?.full_name}!
@@ -132,7 +129,7 @@ export function Dashboard() {
             </div>
 
             <div className="w-full lg:overflow-x-auto trending-card mt-10">
-              <div className="flex gap-4">
+              <div className="flex flex-wrap justify-between gap-4">
                 {trending_news
                   ?.slice(0, 3)
                   .map((news: any) => (
@@ -147,15 +144,19 @@ export function Dashboard() {
             </div>
 
             <div className="mt-6 md:mt-20 flex flex-row items-center bottom-0 space-x-2 md:space-x-0 generate mb-20">
-
-              <Input placeholder="Paste URL here" size="large"
+              <Input
+                placeholder="Paste URL here"
+                size="large"
                 className="sm:mr-4 flex-grow lg:h-[65px] bg-transparent border-2 border-primary w-[244px] text-[12px] lg:[16px]"
                 value={url || videoName || ''}
                 onChange={(e) => setUrl(e.target.value)}
-                style={{ borderRadius: '12px', padding: '10px 15px 10px 15px', }}
+                style={{ borderRadius: '12px', padding: '10px 15px 10px 15px' }}
                 prefix={
-                  <Upload onChange={handleFileChange} showUploadList={false} accept="video/*" >
-
+                  <Upload
+                    onChange={handleFileChange}
+                    showUploadList={false}
+                    accept="video/*"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -174,7 +175,10 @@ export function Dashboard() {
                 }
               />
 
-              <Button type="primary" size="large" onClick={handleGenerate}
+              <Button
+                type="primary"
+                size="large"
+                onClick={handleGenerate}
                 className="!rounded-2xl h-[50px] lg:w-auto lg:h-[65px]"
                 style={{
                   fontSize: '16px',
@@ -185,38 +189,39 @@ export function Dashboard() {
                 Generate
               </Button>
             </div>
-
           </section>
 
-          <section className="w-[30%] border border-[#E9E9E9] bg-[#FBFBFB] p-4">
-
+          <section className="w-full lg:w-[30%] border border-[#E9E9E9] bg-[#FBFBFB] p-4">
             <h1 className="capitalize text-[#5E60CE] font-bold text-[24px]">
               latest from {profile?.user_profile?.fav_newstype}
             </h1>
 
-            <div className="flex flex-col">
-              {favNews.map((news: any) => (
-                <FavNewsCard key={news.id} news={news}
-                  handleNewsClick={handleNewsClick}
-                  isExpanded={isExpanded}
-                />
-              ))}
+            <div className="flex justify-between lg:flex-col">
+              <div className="flex flex-wrap justify-between gap-2">
+                {favNews.map((news: any) => (
+                  <FavNewsCard
+                    key={news.id}
+                    news={news}
+                    handleNewsClick={handleNewsClick}
+                    isExpanded={isExpanded}
+                  />
+                ))}
+              </div>
             </div>
-
           </section>
-
         </div>
       )}
     </section>
   );
 }
 
-
-                {/*<div key={news.id} 
+{
+  /*<div key={news.id} 
                   className="bg-[#B3CCE880] flex flex-col mt-4 px-2 py-4 rounded-lg"
                 >
                   <h1 className="font-semibold text-sm">{news.title}</h1>
                   <p className="text-xs font-normal line-clamp-2 overflow-hidden text-ellipsis">
                     {news.content}
                   </p>
-                </div>*/}
+                </div>*/
+}

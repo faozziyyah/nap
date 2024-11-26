@@ -34,8 +34,8 @@ function Main({ children }: { children: React.ReactNode }) {
   const sidebarWidth = 300;
 
   const layoutStyle = {
-    marginLeft: collapsed ? `auto` : `${sidebarWidth}px`,
-    width: collapsed ? `80%` : `75%`,
+    marginLeft: collapsed ? `auto` : `0px`,
+    width: collapsed ? `90%` : `100%`,
     transition: 'margin-left 0.3s',
     backgroundColor: '',
   };
