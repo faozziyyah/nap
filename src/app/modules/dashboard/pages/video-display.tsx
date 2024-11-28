@@ -8,6 +8,7 @@ import ArticleImages from '../component/articleImages';
 const { Title } = Typography;
 
 export function VideoDisplay() {
+
   const { url } = useUrlContext();
   const { profile } = useProfile();
   const { articleData } = useArticleContext();
@@ -17,8 +18,11 @@ export function VideoDisplay() {
 
   return (
     <div className="pt-16 md:pt-32 max-w-full lg:pl-40 lg:pr-32">
+
       <div className="messages space-y-4">
+
         <div className="flex flex-col md:flex-row justify-end space-x-0 md:space-x-5 items-center">
+          
           <div className="p-3 md:p-5 border-primary flex items-center space-x-2 border-solid rounded-xl text-center md:text-left">
             <span>
               {' '}
@@ -39,11 +43,15 @@ export function VideoDisplay() {
 
             <span> {url ? url : articleData?.url}</span>
           </div>
+
           <Avatar size={50} style={{ background: '#5E60CE' }}>
             {acronym}
           </Avatar>
+
         </div>
+        
         <div className="space-x-5 flex">
+
           <div>
             <Avatar size={40} style={{ background: '#5E60CE' }} />
           </div>
@@ -67,6 +75,7 @@ export function VideoDisplay() {
 
             <span> {url ? url : articleData?.url}</span>
           </div>
+
           <div>
             <>
               <Title level={4}>
@@ -77,8 +86,11 @@ export function VideoDisplay() {
               </>
             </>
           </div>
+
         </div>
+
       </div>
+      
     </div>
   );
 }

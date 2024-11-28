@@ -197,7 +197,7 @@ export function Dashboard() {
             </h1>
 
             <div className="flex justify-between lg:flex-col">
-              <div className="flex flex-wrap justify-between gap-2">
+              <div className="flex flex-wrap justify-between lg:flex-col gap-2">
                 {favNews.map((news: any) => (
                   <FavNewsCard
                     key={news.id}
