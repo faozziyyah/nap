@@ -29,7 +29,7 @@ const FavNewsCard: React.FC<FavNewsCardProps> = ({
   return (
     <div
       key={news.id}
-      className="news-card cursor-pointer bg-[#B3CCE880] flex flex-col mt-4 px-2 py-4 rounded-lg w-[40%] lg:w-full"
+      className=" cursor-pointer bg-[#B3CCE880] flex flex-col mt-4 px-2 py-4 rounded-lg w-[40%] md:w-[90%] lg:w-[100%]"
       onClick={() => handleNewsClick(news?.article_url)}
       onTouchEnd={() => handleTouchEnd(news?.article_url)}
     >

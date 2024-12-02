@@ -34,8 +34,8 @@ function Main({ children }: { children: React.ReactNode }) {
   const sidebarWidth = 300;
 
   const layoutStyle = {
-    marginLeft: collapsed ? `auto` : `0px`,
-    width: collapsed ? `90%` : `100%`,
+    marginLeft: collapsed ? `auto` : `22em`,
+    width: collapsed ? `90%` : `78%`,
     transition: 'margin-left 0.3s',
     backgroundColor: '',
   };
@@ -44,21 +44,25 @@ function Main({ children }: { children: React.ReactNode }) {
     <MainLayoutContext.Provider value={null}>
       <Layout className="layout">
         <SideBar collapsed={collapsed} setCollapsed={setCollapsed} />
+
         <MobileSideBar
           collapsed={collapsedMobile}
           setCollapsed={setCollapsedMobile}
         />
+
         <Layout
           className={`main-layout ${isSmallScreen ? 'small-screen' : ''}`}
         >
           <NavBarProfile setCollapsed={setCollapsed} collapsed={collapsed} />
+
           <MobileNavBarProfile
             setCollapsed={setCollapsedMobile}
             collapsed={collapsedMobile}
           />
-          <div className="content" style={layoutStyle}>
+
+          <div className="content bg-red-300" style={layoutStyle}>
             <ScrollToTop />
-            <main>{children}</main>
+            <main className="bg-blue-200">{children}</main>
           </div>
         </Layout>
       </Layout>
